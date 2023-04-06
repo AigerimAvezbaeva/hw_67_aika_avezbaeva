@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>HW_67</title>
+  </head>
+  <body>
+    <div class="container">
+        <div class="main">
+      <p>Нажми на "+", и мы тебя удивим!</p>
+      <input id="add-item-btn" type="button" class="button" value="+" />
+    </div>
+</div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+      $(function () {
+        let layout = $('<div>').addClass('layout');
+        let modal = $('<div>').addClass('custom-modal');
+        modal.attr('id', 'modal');
+        let close = $('<button>').addClass('close').text('Закрыть');
+        close.attr('id', 'close');
+        let pText = $('<p>').addClass('p-notif').text('Я пошутил)');
+        modal.append(pText);
+        modal.append(close);
+        layout.append(modal);
+        $('body').append(layout);
+        
+        $("#add-item-btn").click(function () {
+        $('.conainer').append(layout);
+          $(".layout").css("display", "flex");
+          setTimeout(function () {
+            $(".layout").css("display", "none");
+          }, 5000);
+        });
+
+        $("#close").click(function () {
+          $(".layout").css("display", "none");
+        });
+
+        $("#modal").click(function () {
+          $(".layout").css("display", "none");
+        });
+      });
+    </script>
+  </body>
+</html>
