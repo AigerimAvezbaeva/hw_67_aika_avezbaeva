@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Rick & Morty's Character</title>
+</head>
+
+<body>
+    <div class="container">
+        <a href="index.html" class="link"><h1>Rick and Morty Character Info <span class="titles" style="font-size: 15px;">(tap to go back)</span></h1></a>
+        <div id="character-container"></div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            var characterId = getParameterById("id");
+            $.get("https://rickandmortyapi.com/api/character/" + characterId, function (data) {
+                var character = data;
+                var characterDetails = '<div class="character-details">';
+                characterDetails += '<img src="' + character.image + '">';
+                characterDetails += '<h2>' + character.name + '</h2>';
+                characterDetails += '<p class="titles">Status: <span style="color:white;">' + character.status + '</span></p>';
+                characterDetails += '<p class="titles">Species: <span style="color:white;">' + character.species + '</span></p>';
+                characterDetails += '<p class="titles">Gender: <span style="color:white;">' + character.gender + '</span></p>';
+                characterDetails += '<p class="titles">Location: <span style="color:white;">' + character.location.name + '</span></p>';
+                characterDetails += '</div>';
+
+                $("#character-container").html(characterDetails);
+            });
+        });
+
+        function getParameterById(id, url) {
+            if (!url) url = window.location.href;
+            id = id.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + id + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+    </script>
+</body>
+
+</html>
